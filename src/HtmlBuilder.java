@@ -27,8 +27,8 @@ class HtmlBuilder {
             htmlStream.write("<meta charset='utf-8'>\n".getBytes());
             htmlStream.write("<title>RECTS</title>\n".getBytes());
             htmlStream.write("</head>\n".getBytes());
-            htmlStream.write("<body bgcolor=gray>\n".getBytes());
-            htmlStream.write("<table style='border-spacing:initial'>\n".getBytes());
+            htmlStream.write("<body style='border-spacing:initial' bgcolor=black >\n".getBytes());
+            htmlStream.write("<table>\n".getBytes());
             htmlStream.write(markup.getBytes());
             htmlStream.write("</table>\n".getBytes());
             htmlStream.write("</body>\n".getBytes());

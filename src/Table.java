@@ -13,9 +13,6 @@ public class Table {
         for (Rect rect : rects) {
             verticals.add(rect.x1);
             verticals.add(rect.x2);
-        }
-
-        for (Rect rect : rects) {
             horizontals.add(rect.y1);
             horizontals.add(rect.y2);
         }
@@ -27,19 +24,31 @@ public class Table {
         int prevV = 0;
         int row = 0;
 
-        for (Integer vertical : verticals) {
-            for (Integer horizontal : horizontals) {
+        System.out.println(verticals.size());
+        System.out.println(horizontals.size());
+
+        for (Integer horizontal : horizontals) {
+            for (Integer vertical : verticals) {
 
                 Cell newCell = new Cell();
-                newCell.w = horizontal - prevH;
-                newCell.h = vertical - prevV;
+                newCell.w = vertical - prevV;
+                newCell.h = horizontal - prevH;
                 newCell.row = row;
+
+                for (Rect rect : rects) {
+                    if (    rect.x1 <= prevV &&
+                            rect.y1 <= prevH &&
+                            rect.x2 >= vertical &&
+                            rect.y2 >= horizontal)
+                        newCell.c = rect.c;
+                }
+
                 cells.add(newCell);
 
-                prevH = horizontal;
+                prevV = vertical;
             }
-            prevH = 0;
-            prevV = vertical;
+            prevV = 0;
+            prevH = horizontal;
             row++;
         }
 
@@ -47,20 +56,23 @@ public class Table {
 
     public String html() {
 
-        int curRow = 0;
+        int curRow = -1;
         StringBuilder markup = new StringBuilder();
 
-        markup.append("<tr>\n");
         for (Cell cell : cells) {
             if (cell.row > curRow) {
+                if (curRow != -1)
+                    markup.append("</tr>\n");
+
+                markup.append("<tr height=")
+                        .append(cell.h)
+                        .append(">\n");
+
                 curRow = cell.row;
-                markup.append("</tr>\n<tr>\n");
             }
 
             markup.append("<td width=")
                     .append(cell.w)
-                    .append(" height=")
-                    .append(cell.h)
                     .append(" bgcolor=")
                     .append(cell.c)
                     .append("></td>\n");
