@@ -1,37 +1,47 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 class HtmlBuilder {
 
     private File html;
-    private IReader reader;
+    private String markup = "";
+    private FileOutputStream htmlStream;
 
-    public HtmlBuilder(File f, IReader r) {
+    public HtmlBuilder(File f) {
         html = f;
-        reader = r;
+
+        try {
+            htmlStream = new FileOutputStream(html);
+        } catch (FileNotFoundException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
-    public void BuildHtml() {
+    public void buildHtml() {
+        System.out.println("Building html...");
+        try {
+            htmlStream.write("<html>\n".getBytes());
+            htmlStream.write("<head>\n".getBytes());
+            htmlStream.write("<meta charset='utf-8'>\n".getBytes());
+            htmlStream.write("<title>RECTS</title>\n".getBytes());
+            htmlStream.write("</head>\n".getBytes());
+            htmlStream.write("<body bgcolor=gray>\n".getBytes());
+            htmlStream.write("<table style='border-spacing:initial'>\n".getBytes());
+            htmlStream.write(markup.getBytes());
+            htmlStream.write("</table>\n".getBytes());
+            htmlStream.write("</body>\n".getBytes());
+            htmlStream.write("</html>\n".getBytes());
+        } catch (IOException exception) {
+            System.out.println(exception.getMessage());
+        }
 
-        List<Rect> rects = reader.GetElements();
-
-//        try {
-//
-//
-//
-//        } catch (IOException exception) {
-//            System.out.println(exception.getMessage());
-//        }
-
+        System.out.println("Ok!");
     }
 
-    private void GenerateRect(Rect r) {
-
-        // html generation
-        System.out.println("Html generation...");
-
+    public void insertMarkup(String m) {
+        markup += m;
     }
 
 }

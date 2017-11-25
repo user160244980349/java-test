@@ -5,19 +5,26 @@ public class Main {
 
     public static void main(String[] args) {
 
-        File Xml = new File(args[0]);
-        File Html = new File(args[1]);
+        File xml = new File(args[0]);
+        File html = new File(args[1]);
 
         try {
 
-            XmlReader XmlR = new XmlReader(Xml);
-            HtmlBuilder HtmlB = new HtmlBuilder(Html, XmlR);
+            if (html.exists()) {
+                boolean deleted = html.delete();
+                if (deleted)
+                    System.out.println("Html is deleted!");
+            }
 
-            boolean created = Html.createNewFile();
+            boolean created = html.createNewFile();
             if (created)
                 System.out.println("Html is created!");
 
-            HtmlB.BuildHtml();
+            XmlReader xmlReader = new XmlReader(xml);
+            Table table = new Table(xmlReader.GetRects());
+            HtmlBuilder htmlBuilder = new HtmlBuilder(html);
+            htmlBuilder.insertMarkup(table.html());
+            htmlBuilder.buildHtml();
 
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
