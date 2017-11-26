@@ -19,7 +19,7 @@ class XmlReader {
     }
 
     public List<Rect> GetRects() {
-        List<Rect> rects = new ArrayList<Rect>();
+        List<Rect> rects = new ArrayList<>();
         try {
             System.out.println("Parsing rects...");
 

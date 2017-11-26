@@ -7,9 +7,9 @@ class HtmlTable {
     private List<Cell> cells;
 
     public HtmlTable(List<Rect> rects) {
-        cells = new ArrayList<Cell>();
-        List<Integer> verticalsXCoords = new ArrayList<Integer>();
-        List<Integer> horizontalsYCoords = new ArrayList<Integer>();
+        cells = new ArrayList<>();
+        List<Integer> verticalsXCoords = new ArrayList<>();
+        List<Integer> horizontalsYCoords = new ArrayList<>();
 
         for (Rect rect : rects) {
             verticalsXCoords.add(rect.x1);
@@ -61,7 +61,9 @@ class HtmlTable {
 
         int curRow = -1;
         StringBuilder markup = new StringBuilder();
+
         markup.append("<table style='border-spacing:initial'>\n");
+
         for (Cell cell : cells) {
             if (cell.row > curRow) {
                 if (curRow != -1)
@@ -85,7 +87,9 @@ class HtmlTable {
                 markup.append("></td>\n");
 
         }
+
         markup.append("</tr>\n</table>\n");
+
         return markup.toString();
     }
 
