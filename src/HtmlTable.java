@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+// Представление прямоугольников
+// в виде таблицы состоящей из ячеек
 class HtmlTable {
 
     private List<Cell> cells;
@@ -12,6 +14,7 @@ class HtmlTable {
         List<Integer> verticalsXCoords = new ArrayList<>();
         List<Integer> horizontalsYCoords = new ArrayList<>();
 
+        // Берем проекции всех сторон всех прямоугольников на оси x и y
         for (Rect rect : rects) {
             verticalsXCoords.add(rect.x1);
             verticalsXCoords.add(rect.x2);
@@ -19,22 +22,36 @@ class HtmlTable {
             horizontalsYCoords.add(rect.y2);
         }
 
+        // Сортируем их
         verticalsXCoords.sort(Integer::compareTo);
         horizontalsYCoords.sort(Integer::compareTo);
 
+        // Создаем буфферную переменную, в которую
+        // будем записывать правую и нижнюю координаты,
+        // к которым прицепим следующую ячейку
         Cell previousCell = new Cell();
         previousCell.w = 0;
         previousCell.h = 0;
         previousCell.row = 0;
 
+        // Из всех сторон всех прямоугольников строим решетку,
+        // причем все образующиеся ячейки располагаются 2мя
+        // параметрами относительно верхнего и левого соседа
         for (Integer horizontalYCoord : horizontalsYCoords) {
             for (Integer verticalXCoord : verticalsXCoords) {
 
+                // Создаем ячейку таблицы
                 Cell newCell = new Cell();
+                // В зависимости от координат предыдущей ячейки
+                // рассчитывается ширина новой ячейки
                 newCell.w = verticalXCoord - previousCell.w;
                 newCell.h = horizontalYCoord - previousCell.h;
                 newCell.row = previousCell.row;
 
+                // В этом цикле раскрашиваем нужные клетки.
+                // Цикл начинается с последнего элемента,
+                // т.е. ищем цвет прямоугольника,
+                // который перекроет остальные прямоугольники
                 ListIterator<Rect> it = rects.listIterator(rects.size());
                 while (it.hasPrevious()) {
                     Rect rect = it.previous();
@@ -47,6 +64,9 @@ class HtmlTable {
                     }
                 }
 
+                // Исключение ячеек с нулевой шириной или высотой.
+                // Такое возможно когда 2 прямоугольника имеют
+                // одинаковые соответсвенные координаты
                 if (newCell.w != 0 && newCell.h != 0)
                     cells.add(newCell);
 
@@ -59,6 +79,9 @@ class HtmlTable {
         System.out.println("Ok!");
     }
 
+    // Ничего интересного, просто генерация разметки,
+    // как метод сериализации объекта таблицы
+    // на основе ранее полученных ячеек
     public String html() {
         System.out.println("Building table markup...");
         int curRow = -1;

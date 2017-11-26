@@ -10,6 +10,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+// Класс парсит прямоугольники из xml-файла
+// и возвращает их список
 class XmlReader {
 
     private File xml;

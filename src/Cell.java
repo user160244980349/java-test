@@ -1,3 +1,5 @@
+
+// Класс ячейки таблицы
 class Cell {
 
     public int w;

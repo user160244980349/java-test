@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+// Класс создает поток для редактирования документа,
+// генерирует его начало и конец и
+// аккумулирует стороннюю разметку
 class HtmlBuilder {
 
     private File html;

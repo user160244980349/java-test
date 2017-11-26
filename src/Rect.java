@@ -1,3 +1,5 @@
+
+// Класс прямоугольника
 class Rect {
 
     public int x1;
