@@ -7,6 +7,7 @@ class HtmlTable {
     private List<Cell> cells;
 
     public HtmlTable(List<Rect> rects) {
+        System.out.println("Combining rects with cells...");
         cells = new ArrayList<>();
         List<Integer> verticalsXCoords = new ArrayList<>();
         List<Integer> horizontalsYCoords = new ArrayList<>();
@@ -55,6 +56,7 @@ class HtmlTable {
             previousCell.w = 0;
             previousCell.row++;
         }
+        System.out.println("Ok!");
     }
 
     public String html() {
