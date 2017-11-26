@@ -39,7 +39,7 @@ class HtmlTable {
                     Rect rect = it.previous();
                     if (    rect.x1 <= previousCell.w   &&
                             rect.y1 <= previousCell.h   &&
-                            rect.x2 >= verticalXCoord         &&
+                            rect.x2 >= verticalXCoord   &&
                             rect.y2 >= horizontalYCoord) {
                         newCell.c = rect.c;
                         break;
