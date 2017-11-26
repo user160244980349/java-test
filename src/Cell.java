@@ -1,4 +1,4 @@
-public class Cell {
+class Cell {
 
     public int w;
     public int h;
