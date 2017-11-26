@@ -57,7 +57,7 @@ class Table {
 
         int curRow = -1;
         StringBuilder markup = new StringBuilder();
-
+        markup.append("<table style='border-spacing:initial'>\n");
         for (Cell cell : cells) {
             if (cell.row > curRow) {
                 if (curRow != -1)
@@ -71,14 +71,17 @@ class Table {
             }
 
             markup.append("<td width=")
-                    .append(cell.w)
-                    .append(" bgcolor=")
-                    .append(cell.c)
-                    .append("></td>\n");
+                    .append(cell.w);
+
+            if (cell.c != null)
+                markup.append(" bgcolor=")
+                        .append(cell.c)
+                        .append("></td>\n");
+            else
+                markup.append("></td>\n");
 
         }
-        markup.append("</tr>\n");
-
+        markup.append("</tr>\n</table>\n");
         return markup.toString();
     }
 

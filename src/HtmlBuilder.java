@@ -27,10 +27,8 @@ class HtmlBuilder {
             htmlStream.write("<meta charset='utf-8'>\n".getBytes());
             htmlStream.write("<title>RECTS</title>\n".getBytes());
             htmlStream.write("</head>\n".getBytes());
-            htmlStream.write("<body bgcolor=black>\n".getBytes());
-            htmlStream.write("<table style='border-spacing:initial'>\n".getBytes());
+            htmlStream.write("<body>\n".getBytes());
             htmlStream.write(markup.getBytes());
-            htmlStream.write("</table>\n".getBytes());
             htmlStream.write("</body>\n".getBytes());
             htmlStream.write("</html>\n".getBytes());
         } catch (IOException exception) {
