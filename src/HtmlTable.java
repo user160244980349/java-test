@@ -8,30 +8,30 @@ class HtmlTable {
 
     public HtmlTable(List<Rect> rects) {
         cells = new ArrayList<Cell>();
-        List<Integer> verticals = new ArrayList<Integer>();
-        List<Integer> horizontals = new ArrayList<Integer>();
+        List<Integer> columns = new ArrayList<Integer>();
+        List<Integer> rows = new ArrayList<Integer>();
 
         for (Rect rect : rects) {
-            verticals.add(rect.x1);
-            verticals.add(rect.x2);
-            horizontals.add(rect.y1);
-            horizontals.add(rect.y2);
+            columns.add(rect.x1);
+            columns.add(rect.x2);
+            rows.add(rect.y1);
+            rows.add(rect.y2);
         }
 
-        verticals.sort(Integer::compareTo);
-        horizontals.sort(Integer::compareTo);
+        columns.sort(Integer::compareTo);
+        rows.sort(Integer::compareTo);
 
         Cell previousCell = new Cell();
         previousCell.w = 0;
         previousCell.h = 0;
         previousCell.row = 0;
 
-        for (Integer horizontal : horizontals) {
-            for (Integer vertical : verticals) {
+        for (Integer row : rows) {
+            for (Integer column : columns) {
 
                 Cell newCell = new Cell();
-                newCell.w = vertical - previousCell.w;
-                newCell.h = horizontal - previousCell.h;
+                newCell.w = column - previousCell.w;
+                newCell.h = row - previousCell.h;
                 newCell.row = previousCell.row;
 
                 ListIterator<Rect> it = rects.listIterator(rects.size());
@@ -39,8 +39,8 @@ class HtmlTable {
                     Rect rect = it.previous();
                     if (    rect.x1 <= previousCell.w   &&
                             rect.y1 <= previousCell.h   &&
-                            rect.x2 >= vertical         &&
-                            rect.y2 >= horizontal) {
+                            rect.x2 >= column         &&
+                            rect.y2 >= row) {
                         newCell.c = rect.c;
                         break;
                     }
@@ -49,9 +49,9 @@ class HtmlTable {
                 if (newCell.w != 0 && newCell.h != 0)
                     cells.add(newCell);
 
-                previousCell.w = vertical;
+                previousCell.w = column;
             }
-            previousCell.h = horizontal;
+            previousCell.h = row;
             previousCell.w = 0;
             previousCell.row++;
         }
