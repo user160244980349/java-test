@@ -4,7 +4,6 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-
         File xml = new File(args[0]);
         File html = new File(args[1]);
 

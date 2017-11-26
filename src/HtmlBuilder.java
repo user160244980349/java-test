@@ -34,7 +34,6 @@ class HtmlBuilder {
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
-
         System.out.println("Ok!");
     }
 

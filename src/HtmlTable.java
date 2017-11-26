@@ -58,11 +58,10 @@ class HtmlTable {
     }
 
     public String html() {
-
         int curRow = -1;
         StringBuilder markup = new StringBuilder();
 
-        markup.append("<table style='border-spacing:initial'>\n");
+        markup.append("<table style='border-spacing:0'>\n");
 
         for (Cell cell : cells) {
             if (cell.row > curRow) {
