@@ -21,7 +21,7 @@ public class Main {
                 System.out.println("Html is created!");
 
             XmlReader xmlReader = new XmlReader(xml);
-            Table table = new Table(xmlReader.GetRects());
+            HtmlTable table = new HtmlTable(xmlReader.GetRects());
             HtmlBuilder htmlBuilder = new HtmlBuilder(html);
             htmlBuilder.insertMarkup(table.html());
             htmlBuilder.buildHtml();
