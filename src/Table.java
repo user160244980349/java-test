@@ -23,9 +23,7 @@ public class Table {
         int prevH = 0;
         int prevV = 0;
         int row = 0;
-
-        System.out.println(verticals.size());
-        System.out.println(horizontals.size());
+        int i = 0;
 
         for (Integer horizontal : horizontals) {
             for (Integer vertical : verticals) {
@@ -41,9 +39,11 @@ public class Table {
                             rect.x2 >= vertical &&
                             rect.y2 >= horizontal)
                         newCell.c = rect.c;
+                    i++;
                 }
 
-                cells.add(newCell);
+                if (newCell.w != 0 && newCell.h != 0)
+                    cells.add(newCell);
 
                 prevV = vertical;
             }
@@ -51,7 +51,6 @@ public class Table {
             prevH = horizontal;
             row++;
         }
-
     }
 
     public String html() {
