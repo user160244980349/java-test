@@ -60,6 +60,7 @@ class HtmlTable {
     }
 
     public String html() {
+        System.out.println("Building table markup...");
         int curRow = -1;
         StringBuilder markup = new StringBuilder();
 
@@ -91,6 +92,7 @@ class HtmlTable {
 
         markup.append("</tr>\n</table>\n");
 
+        System.out.println("Ok!");
         return markup.toString();
     }
 
