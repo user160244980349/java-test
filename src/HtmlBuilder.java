@@ -10,21 +10,15 @@ class HtmlBuilder {
 
     private File html;
     private String markup = "";
-    private FileOutputStream htmlStream;
 
     public HtmlBuilder(File f) {
         html = f;
-
-        try {
-            htmlStream = new FileOutputStream(html);
-        } catch (FileNotFoundException exception) {
-            System.out.println(exception.getMessage());
-        }
     }
 
     public void buildHtml() {
         System.out.println("Building html...");
         try {
+            FileOutputStream htmlStream = new FileOutputStream(html);
             htmlStream.write("<html>\n".getBytes());
             htmlStream.write("<head>\n".getBytes());
             htmlStream.write("<meta charset='utf-8'>\n".getBytes());
@@ -34,6 +28,7 @@ class HtmlBuilder {
             htmlStream.write(markup.getBytes());
             htmlStream.write("</body>\n".getBytes());
             htmlStream.write("</html>\n".getBytes());
+            htmlStream.close();
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
