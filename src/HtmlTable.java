@@ -55,6 +55,7 @@ class HtmlTable {
                 ListIterator<Rect> it = rects.listIterator(rects.size());
                 while (it.hasPrevious()) {
                     Rect rect = it.previous();
+                    // Проверка является ли ячейка частью прямоугольника
                     if (    rect.x1 <= previousCell.w   &&
                             rect.y1 <= previousCell.h   &&
                             rect.x2 >= verticalXCoord   &&
